@@ -1,14 +1,17 @@
 import QtQuick 2.0
+import Test 1.0
 
 Rectangle {
     id: griditem
-    width: 10
-    height: 10
+    width: 20
+    height: 20
+    border.color: "black"
+    border.width: 1
     property int active: 0
     property int row
     property int column
+    signal gridupdated()
     color: active == 0 ? "white" : "yellow"
-    signal gridwrite(int row, int column)
     MouseArea{
         anchors.fill: parent
         hoverEnabled: true
@@ -16,7 +19,18 @@ Rectangle {
         onExited: parent.opacity = 1.00
         onClicked:{
             active = 1 - active
-            parent.gridwrite(row,column)
+            gridwrite(row,column)
         }
+    }
+    Component.onCompleted:
+    {
+        window.gridupdated.connect(griditem.gridupdated)
+    }
+    Gridslot{
+        id: object
+    }
+    onGridupdated:
+    {
+        active = object.getstate(row,column)
     }
 }

@@ -16,7 +16,6 @@
 class QtQuick2ApplicationViewer : public QQuickView
 {
     Q_OBJECT
-
 public:
     explicit QtQuick2ApplicationViewer(QWindow *parent = 0);
     virtual ~QtQuick2ApplicationViewer();

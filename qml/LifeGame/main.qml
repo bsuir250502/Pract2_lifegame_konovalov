@@ -1,19 +1,20 @@
 import QtQuick 2.0
 
 Rectangle {
-    width: 360
-    height: 360
-    color: "black"
-    property int temp
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            console.log ("Executed")
-            gridwrite(1,2)
-        }
-    }
+    id: window
+    property int rows_n: 10
+    property int columns_n: 10
+    width: rows_n*20
+    height: columns_n*20+50
+    color: "grey"
     signal gridwrite(int x,int y)
-    Griditem{
-        anchors.centerIn: parent
+    signal updategrid()
+    signal gridupdated()
+    GridColumn{}
+    Button{
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 5
     }
 }
